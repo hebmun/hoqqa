@@ -1,5 +1,5 @@
 let ACCESS_USER = 'gabi';
-let ACCESS_PASS = 'WNzjYb2LGlp0uXYtv4Ke';
+let ACCESS_PASS = '';
 
 // CONTACTS API - muntezir.de backend
 // Cloudflare-də CONTACTS_API_TOKEN secret kimi əlavə et.
@@ -18,7 +18,7 @@ const AILE_API_RELAY = 'http://34.30.56.108.nip.io/bazalar/aile-api.php';
 // XƏBƏR relay - GCP serverdə /var/www/bazalar/xeber-api.php
 const XEBER_RELAY = 'http://34.30.56.108.nip.io/bazalar/xeber-api.php';
 const UKR_RELAY = 'http://34.30.56.108.nip.io/bazalar/ukr-api.php';
-const CONTACTS_API_TOKEN_FALLBACK = 'Z8H9z9cu4hlHx9spEqgqoqjwtJm7HgG7FLAqOuYkeSApwKMsI8zZbKcd596Jp5Kq';
+const CONTACTS_API_TOKEN_FALLBACK = '';
 
 // ─── HOQQA (Süni Zəka Araşdırma) ─────────────────────────────────────────────
 const HOQQA_BAZA_BASE = 'http://34.30.56.108.nip.io/bazalar/';
@@ -37,7 +37,7 @@ const SCLIP_SPACE = 'https://muntezir-streetclip.hf.space';
 // ─── DÜNYA / İngiltərə — Companies House (UK) rəsmi API ───────────────────────
 const CH_API = 'https://api.company-information.service.gov.uk';
 // ⬇⬇⬇  COMPANIES HOUSE AÇARI (pulsuz): developer.company-information.service.gov.uk → "REST API" açarı  ⬇⬇⬇
-let CH_API_KEY = 'b872801c-59f6-4b1a-96e3-c682d27b5c9e';   // məs:  const CH_API_KEY = 'a1b2c3d4-5678-...'
+let CH_API_KEY = '';   // məs:  const CH_API_KEY = 'a1b2c3d4-5678-...'
 // ⬆⬆⬆  Boş olsa, İngiltərə tabı açar tələb edir  ⬆⬆⬆
 const SCLIP_COUNTRIES = ['Azerbaijan','Georgia','Armenia','Turkey','Russia','Iran','Iraq','Kazakhstan','Uzbekistan','Turkmenistan','Ukraine','Belarus','Poland','Germany','France','Italy','Spain','Portugal','United Kingdom','Ireland','Netherlands','Belgium','Switzerland','Austria','Czechia','Slovakia','Hungary','Romania','Bulgaria','Greece','Serbia','Croatia','Bosnia and Herzegovina','Albania','North Macedonia','Montenegro','Slovenia','Sweden','Norway','Finland','Denmark','Estonia','Latvia','Lithuania','United States','Canada','Mexico','Brazil','Argentina','Chile','Colombia','Peru','China','Japan','South Korea','North Korea','Taiwan','Hong Kong','Vietnam','Thailand','Cambodia','Laos','Myanmar','Malaysia','Singapore','Indonesia','Philippines','India','Pakistan','Bangladesh','Sri Lanka','Nepal','Afghanistan','Saudi Arabia','United Arab Emirates','Qatar','Kuwait','Israel','Jordan','Lebanon','Syria','Egypt','Morocco','Algeria','Tunisia','Libya','Nigeria','Kenya','Ethiopia','South Africa','Tanzania','Ghana','Australia','New Zealand'];
 
@@ -980,8 +980,8 @@ export const config = {
 };
 
 export default async function handler(request) {
-  const env = process.env;
-  const ctx = {};
+    const env = process.env;
+    const ctx = {};
     ACCESS_USER = env.ACCESS_USER || ACCESS_USER;
     ACCESS_PASS = env.ACCESS_PASS || ACCESS_PASS;
     CH_API_KEY  = env.CH_API_KEY  || CH_API_KEY;
@@ -997,7 +997,7 @@ export default async function handler(request) {
     // MSK doğum finder result polling hər 1-2 saniyədən bir çağırılır.
     // Ona görə bu iki endpoint rate-limitdən çıxarılır; əks halda frontend
     // uzun axtarış zamanı 429 alıb "Server məşğuldur" kimi görünə bilər.
-    const kv = null;
+    const kv = null; // Vercel üçün Cloudflare KV söndürülüb
     const clientIp = request.headers.get('CF-Connecting-IP') || request.headers.get('X-Forwarded-For') || 'unknown';
     const skipRateLimit = (
       url.pathname === '/api/msk-find-birth-start' ||
@@ -3355,7 +3355,8 @@ if (contactsAction === 'deletePhone') {
       }),
       { headers: { 'Content-Type': 'text/html;charset=UTF-8' } }
     );
-  }
+}
+
 function clean(s) {
   return String(s || '').trim().slice(0, 300);
 }
