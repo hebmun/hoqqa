@@ -997,7 +997,7 @@ export default async function handler(request) {
     // MSK doğum finder result polling hər 1-2 saniyədən bir çağırılır.
     // Ona görə bu iki endpoint rate-limitdən çıxarılır; əks halda frontend
     // uzun axtarış zamanı 429 alıb "Server məşğuldur" kimi görünə bilər.
-    const kv = null; // Vercel üçün Cloudflare KV söndürülüb
+    const kv = null;
     const clientIp = request.headers.get('CF-Connecting-IP') || request.headers.get('X-Forwarded-For') || 'unknown';
     const skipRateLimit = (
       url.pathname === '/api/msk-find-birth-start' ||
