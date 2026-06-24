@@ -3356,7 +3356,6 @@ if (contactsAction === 'deletePhone') {
       { headers: { 'Content-Type': 'text/html;charset=UTF-8' } }
     );
   }
-
 function clean(s) {
   return String(s || '').trim().slice(0, 300);
 }
